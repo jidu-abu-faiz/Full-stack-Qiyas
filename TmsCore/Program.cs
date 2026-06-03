@@ -34,11 +34,58 @@ Console.WriteLine($"Total allocated(formatted): {totalAllocation:F2}");
 
 Console.WriteLine("\n Exercise 3: Pipeline Data Corruption \n");
 
-public class Enrollment
+//public class Enrollment
+//{
+//    public string StudentId {get; set;} = string.Empty;
+//    public string CourseCode {get; set;} = string.Empty;
+//    public DateTime processedAt {get; set;}
+//}
+
+var enrollment = new EnrollmentRecord("STU-001", "CS-401", DateTime.UtcNow);
+Console.WriteLine(enrollment);
+
+var corrected = enrollment with { CourseCode = "CS-402" };
+Console.WriteLine(corrected);
+
+var duplicate = new EnrollmentRecord("STU-001", "CS-401", enrollment.EnrolledAt);
+Console.WriteLine($"Same data? {enrollment == duplicate}"); 
+
+Console.WriteLine("\n Exercise 3:  — Part 2: Course Capacity with the field Keyword \n");
+
+// public class Course
+// {
+//     private int _capacity; 
+//     public int Capacity
+//     {
+//         get => _capacity;
+//         set
+//         {
+//             if (value <= 0)
+//                 throw newArgumentOutOfRangeException("Capacity must be positive.");
+//             _capacity = value;
+//         }
+//     }
+//}
+
+var course = new Course{ Code = "CS-401", Title = "Advanced C#", Capacity = 30 };
+Console.WriteLine($"Course: {course.Title} (Capacity: {course.Capacity})");
+// Invalid capacity — should throw
+try
 {
-    public string StudentId {get; set;} = string.Empty;
-    public string CourseCode {get; set;} = string.Empty;
-    public DateTime processedAt {get; set;}
+    course.Capacity =-5;
 }
 
+catch (ArgumentOutOfRangeException ex)
+{
+    Console.WriteLine($"Caught: {ex.Message}");
+}
+// Invalid title — should throw
+try
+{
+    course.Title = "";
+}
 
+catch (ArgumentException ex)
+{
+    Console.WriteLine($"Caught: {ex.Message}");
+}
