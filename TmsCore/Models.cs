@@ -2,6 +2,7 @@ public record EnrollmentRecord(string StudentId, string CourseCode, DateTime Enr
 
 public class Course
 {
+    private int _enrolledCount;
     public required string Code { get; init; }
     public required string Title
     {
@@ -11,19 +12,31 @@ public class Course
             : throw new ArgumentException("Title cannot be empty or whitespace.", nameof(value));
     }
 // C# 14Auto-property validation using 'field'
+private int _capacity;
 public int Capacity
 {
-    get;
-    set => field = value > 0
-        ? value
-        : throw new ArgumentOutOfRangeException(nameof(value), "System constraint: Capacity must begreater than zero.");
+    get => _capacity;
+    set {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value), "Capacity must be greater than or equal to zero.");
+                _capacity = value;
+        }
 }
-public int EnrolledCount { get; set; }
+public int EnrolledCount 
+{ 
+    get => _enrolledCount; 
+    set
+        {
+            if (value < 0 || value > Capacity)
+                throw new ArgumentOutOfRangeException("Invalid enrolled count");
+            _enrolledCount = value;
+        } 
+}
 }
     
 public class Student
 {
-    public required string Id { get; init; }
+    public required string Id { get; init; } = string.Empty;
     public required string Name
         {
         get;
