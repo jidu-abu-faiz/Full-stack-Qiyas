@@ -1,4 +1,6 @@
-﻿string?region = null;
+﻿using System.Diagnostics;
+
+string?region = null;
 
 string? upperRegion = region?.ToUpper();
 Console.WriteLine($"Region(conditional):{upperRegion}");
@@ -115,7 +117,7 @@ IGradable[] cohortAssessments = [
     
 PrintGradeReport(cohortAssessments);
 
-//.......Exercise 4 ...........
+//....... Session 2 Exercise 4 ...........
 
 Console.WriteLine("\n Exercise 4: Defeating the Pyramid of Doom (LO 1.6: Pattern Matching & Guards) \n");
 
@@ -225,3 +227,84 @@ string[] allCourses =
 ];
 
 Console.WriteLine($"\nFull curriculum: {string.Join(", ", allCourses)}");
+
+//....... Session 3 Exercise 6 ...........
+
+Console.WriteLine("\n Exercise 6: Connection Dropping Under Load (LO 1.7: Async/Await) \n");
+
+var sw =Stopwatch.StartNew();
+for (int i = 0; i < 5; i++)
+{
+Thread.Sleep(300); // Thread is HELD for 300ms cannot serve anyone else
+}
+Console.WriteLine($"Blocking sequential: {sw.ElapsedMilliseconds}ms");
+// ASYNC BUTSTILL SEQUENTIAL: Thread released, but calls are one-at-a-time
+sw.Restart();
+for (int i = 0; i < 5; i++)
+{
+await Task.Delay(300); // Thread released while waiting but still sequential
+}
+Console.WriteLine($"Async sequential: {sw.ElapsedMilliseconds}ms");
+// THE RIGHT WAY:Asyncparallel all 5 start simultaneously
+sw.Restart();
+var tasks = Enumerable.Range(0, 5).Select(_ => Task.Delay(300));
+await Task.WhenAll(tasks);
+Console.WriteLine($"Async parallel: {sw.ElapsedMilliseconds}ms");
+
+async Task<Student> FetchStudentAsync(string id)
+{
+    Console.WriteLine($" Fetching {id}...");
+    await Task.Delay(300); // Simulate database latency
+    return new Student
+    {
+        Id = id,
+        Name = $"Student-{id}",
+        Age = 20,
+        GPA = id switch
+        {
+            "S1" => 3.8m,
+            "S2" => 2.4m,
+            "S3" => 3.5m,
+            "S4" => 1.9m,
+            "S5" => 3.2m,
+            _ => 2.5m
+        }
+    };
+}
+
+async Task<Course> FetchCourseAsync(string code)
+{
+    Console.WriteLine($" Fetching course {code}...");
+    await Task.Delay(200); // Simulate database latency
+    return new Course
+    {
+        Code = code,
+        Title = $"Course-{code}",
+        Capacity = code switch
+        {
+            "CRS-101" => 2,
+            "CRS-201" => 30,
+            "CRS-301" => 15,
+            _ => 25
+        }
+    };
+}
+
+sw.Restart();
+
+// Start all fetches simultaneously students AND courses
+string[] studentIds = ["S1", "S2", "S3", "S4", "S5"];
+string[] courseCodes = ["CRS-101", "CRS-201", "CRS-301"];
+
+var studentTasks = studentIds.Select(id => FetchStudentAsync(id));
+var courseTasks = courseCodes.Select(code => FetchCourseAsync(code));
+
+// Both arrays load concurrently
+Student[] stud = await Task.WhenAll(studentTasks);
+Course[] courses = await Task.WhenAll(courseTasks);
+
+Console.WriteLine($"\nLoaded {stud.Length} students and {courses.Length} courses in {sw.ElapsedMilliseconds}ms");
+foreach (var s in stud)
+{
+Console.WriteLine($" {s.Name} GPA: {s.GPA}");
+}
