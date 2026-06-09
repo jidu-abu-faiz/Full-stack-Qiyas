@@ -32,6 +32,8 @@ decimal totalAllocation = grantPerStudent * 100000;
 Console.WriteLine($"Total allocated (decimal): {totalAllocation}");
 Console.WriteLine($"Total allocated(formatted): {totalAllocation:F2}");
 
+//.....Exercise 3: Pipeline Data Corruption.......
+
 Console.WriteLine("\n Exercise 3: Pipeline Data Corruption \n");
 
 //public class Enrollment
@@ -89,3 +91,26 @@ catch (ArgumentException ex)
 {
     Console.WriteLine($"Caught: {ex.Message}");
 }
+
+Console.WriteLine("\n Exercise 3:  —  Part 3: Student Model \n");
+
+var s = new Student { Id = "S1", Name ="Abeba", Age = 20, GPA= 3.8m };
+Console.WriteLine($"Student: {s.Name}, GPA: {s.GPA}");
+
+Console.WriteLine("\n Exercise  3B: Interface Contract Wiring \n");
+
+void PrintGradeReport(IEnumerable<IGradable> assessments)
+{
+    Console.WriteLine("--- Grade Report---");
+    foreach (var item in assessments)
+    {
+        Console.WriteLine($"{item.Title}: {item.CalculateGrade():F2}%");
+    }
+}
+// Test it — one array holds two completely different types
+IGradable[] cohortAssessments = [
+    new Quiz { Title = "C# Basics", CorrectAnswers = 18, TotalQuestions = 20 },
+    new LabAssignment { Title = "Registration API", FunctionalityScore = 90m, CodeQualityScore =85m}
+    ];
+    
+PrintGradeReport(cohortAssessments);

@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\sclab\\.nuget\\packages\\": {}
+    "C:\\Users\\Freedom School\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sclab\\Desktop\\Full-Stack-Qiyas\\TmsCore\\TmsCore.csproj",
+      "projectUniqueName": "C:\\Users\\Freedom School\\Desktop\\Full-Stack-Qiyas\\TmsCore\\TmsCore.csproj",
       "projectName": "TmsCore",
-      "projectPath": "C:\\Users\\sclab\\Desktop\\Full-Stack-Qiyas\\TmsCore\\TmsCore.csproj",
-      "packagesPath": "C:\\Users\\sclab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sclab\\Desktop\\Full-Stack-Qiyas\\TmsCore\\obj\\",
+      "projectPath": "C:\\Users\\Freedom School\\Desktop\\Full-Stack-Qiyas\\TmsCore\\TmsCore.csproj",
+      "packagesPath": "C:\\Users\\Freedom School\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Freedom School\\Desktop\\Full-Stack-Qiyas\\TmsCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sclab\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Freedom School\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
