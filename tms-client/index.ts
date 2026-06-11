@@ -54,27 +54,59 @@
 //});
 
 //......session 2 exercise 4 ....
+//
+//import {
+//    AssessmentItem,
+//    calculateGrade,
+//} from "./models/assessment.model.js";
+//
+//const quiz: AssessmentItem = {
+//    id: "QUIZ-001",
+//    kind: "quiz",
+//    title: "SQL Basics",
+//    correctAnswers: 8,
+//    totalQuestions: 10,
+//};
+//
+//const lab: AssessmentItem = {
+//    id: "LAB-001",
+//    kind: "lab",
+//    title: "REST API Project",
+//    functionalityScore: 85,
+//    codeQualityScore: 90,
+//};
+//
+//console.log(`Quiz grade: ${calculateGrade(quiz)}%`);
+//console.log(`Lab grade: ${calculateGrade(lab)}%`);
+
+//..... session 2 exercise 5 ....
+
+import { Temporal } from "@js-temporal/polyfill";
+import {
+    EnrollmentStatus,
+    describeEnrollment,
+} from "./models/enrollment.model.js";
+
+const pending: EnrollmentStatus = {
+    status: "PENDING",
+    requestedAt: Temporal.Now.instant(),
+    studentId: "STU-001",
+    courseId: "CRS-101",
+};
+
+console.log(describeEnrollment(pending));
+
+//... session 2 exercise 5B ...
 
 import {
-    AssessmentItem,
-    calculateGrade,
-} from "./models/assessment.model.js";
+    CourseStatus,
+    describeCourse,
+} from "./models/course.model.js";
 
-const quiz: AssessmentItem = {
-    id: "QUIZ-001",
-    kind: "quiz",
-    title: "SQL Basics",
-    correctAnswers: 8,
-    totalQuestions: 10,
+const webDev: CourseStatus = {
+    status: "ACTIVE",
+    enrolledCount: 28,
+    startDate: Temporal.PlainDate.from("2026-09-01"),
 };
 
-const lab: AssessmentItem = {
-    id: "LAB-001",
-    kind: "lab",
-    title: "REST API Project",
-    functionalityScore: 85,
-    codeQualityScore: 90,
-};
-
-console.log(`Quiz grade: ${calculateGrade(quiz)}%`);
-console.log(`Lab grade: ${calculateGrade(lab)}%`);
+console.log(describeCourse(webDev));
