@@ -89,4 +89,30 @@ const webDev = {
     startDate: Temporal.PlainDate.from("2026-09-01"),
 };
 console.log(describeCourse(webDev));
+//... session 2 exercise 6 ...
+import { renderResponse } from "./models/api-response.model.js";
+const studentRes = {
+    status: "success",
+    data: {
+        id: "STU-001",
+        name: "Dawit Bekele",
+        enrollmentDate: Temporal.Now.instant(),
+        gpa: 3.4,
+    },
+    fetchedAt: Temporal.Now.instant(),
+};
+console.log(renderResponse(studentRes, (s) => `${s.name} GPA: ${s.gpa ?? "N/A"}`));
+const courseListRes = {
+    status: "success",
+    data: [
+        {
+            id: "CRS-101",
+            title: "Web Development Fundamentals",
+            capacity: 30,
+            startDate: Temporal.PlainDate.from("2026-09-01"),
+        },
+    ],
+    fetchedAt: Temporal.Now.instant(),
+};
+console.log(renderResponse(courseListRes, (courses) => courses.map((c) => c.title).join(", ")));
 //# sourceMappingURL=index.js.map
