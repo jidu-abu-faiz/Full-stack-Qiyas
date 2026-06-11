@@ -1,10 +1,45 @@
-import { Temporal } from "@js-temporal/polyfill";
-const student = {
-    id: "STU-001",
-    name: "Hana Tadesse",
-    enrollmentDate: Temporal.Now.instant(),
-};
+//import { Temporal } from "@js-temporal/polyfill";
+//import  { Student } from "./models/student.model.js";
+//const student: Student = {
+//   id: "STU-001",
+//    name: "Hana Tadesse",
+//    enrollmentDate: Temporal.Now.instant(),
+//};
 // Try these what does the compiler say?
-///console.log(student.gpa.toFixed(2));
-console.log(student.gpa?.toFixed(2) ?? "Not yet graded");
+//student.id = "STU-999";
+//console.log(student.gpa.toFixed(2));
+//console.log(student.gpa?.toFixed(2) ?? "Not yet graded");
+//..... exercise 3
+//import { isStudent } from "./models/student.model.js";
+//
+//function processStudent(raw: unknown) {
+//    if (isStudent(raw)) {
+//        const gpaDisplay =
+//            raw.gpa?.toFixed(2) ?? "Not yet graded";
+//
+//        console.log(
+//            `Student ${raw.name} GPA: ${gpaDisplay}`
+//        );
+//    } else {
+//        console.error("Invalid student data received");
+//    }
+//}
+//
+//processStudent({
+//    id: "STU-001",
+//    name: "Hana",
+//    gpa: 3.7
+//});
+//
+//processStudent(42);
+//..... exercise 3B...
+import { parseStudent } from "./models/student.model.js";
+console.log(parseStudent({
+    id: "STU-001",
+    name: "Hana",
+}));
+parseStudent({
+    id: 42,
+    name: "Test",
+});
 //# sourceMappingURL=index.js.map
