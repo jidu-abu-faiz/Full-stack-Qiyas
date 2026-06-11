@@ -39,16 +39,42 @@
 
 //..... exercise 3B...
 
-import { parseStudent } from "./models/student.model.js";
+//import { parseStudent } from "./models/student.model.js";
+//
+//console.log(
+//    parseStudent({
+//        id: "STU-001",
+//        name: "Hana",
+//    })
+//);
+//
+//parseStudent({
+//    id: 42,
+//    name: "Test",
+//});
 
-console.log(
-    parseStudent({
-        id: "STU-001",
-        name: "Hana",
-    })
-);
+//......session 2 exercise 4 ....
 
-parseStudent({
-    id: 42,
-    name: "Test",
-});
+import {
+    AssessmentItem,
+    calculateGrade,
+} from "./models/assessment.model.js";
+
+const quiz: AssessmentItem = {
+    id: "QUIZ-001",
+    kind: "quiz",
+    title: "SQL Basics",
+    correctAnswers: 8,
+    totalQuestions: 10,
+};
+
+const lab: AssessmentItem = {
+    id: "LAB-001",
+    kind: "lab",
+    title: "REST API Project",
+    functionalityScore: 85,
+    codeQualityScore: 90,
+};
+
+console.log(`Quiz grade: ${calculateGrade(quiz)}%`);
+console.log(`Lab grade: ${calculateGrade(lab)}%`);
