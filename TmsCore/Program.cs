@@ -353,6 +353,8 @@ foreach (var studentss in students)
 //    }
 //}
 
+
+// Exercise 7B: The Enrollment Report (LO 1.5 + 1.7 Integration)
 // Stop the timer
 sw.Stop();
 // Calculate class average GPA from loaded students
