@@ -15,6 +15,23 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddSingleton<EnrollmentWorker>();
+
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+
+builder.Services.AddScoped<IAuditService, AuditService>();
+
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
+builder.Services
+    .AddOptions<PaymentOptions>()
+    .Bind(builder.Configuration.GetSection("Payment"))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+    
 var app = builder.Build();
 
 app.UseExceptionHandler(errorApp =>
